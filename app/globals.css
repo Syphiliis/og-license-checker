@@ -1,0 +1,177 @@
+/* ===== 0G Minimal Theme (vanilla CSS) ===== */
+
+/* Palette & tokens */
+:root {
+  --brand-purple: #9200E1;
+  --brand-500: #CB8AFF;
+  --brand-400: #D5A3FF;
+
+  --ink: #0a0a0a;
+  --muted: #6b7280;
+  --bg: #f7f8fb;
+  --surface: #ffffff;
+  --border: #e5e7eb;
+
+  --radius: 16px;
+  --radius-pill: 9999px;
+
+  --shadow-1: 0 1px 2px rgba(0,0,0,.06);
+  --shadow-2: 0 8px 24px rgba(0,0,0,.06);
+
+  --h1: clamp(28px, 4vw, 40px);
+  --subtitle: clamp(14px, 2vw, 16px);
+  --text: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #fafafa;
+    --muted: #9ca3af;
+    --bg: #0a0a0a;
+    --surface: #0f0f10;
+    --border: #232323;
+    --shadow-1: 0 1px 2px rgba(0,0,0,.5);
+    --shadow-2: 0 10px 30px rgba(0,0,0,.55);
+  }
+}
+
+/* Reset léger + typographie système */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+html { color-scheme: light dark; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: var(--text)/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+        Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Accessibilité */
+.sr-only {
+  position: absolute !important; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip: rect(0,0,0,0); white-space:nowrap; border:0;
+}
+:where(button,a,input,textarea,select):focus-visible {
+  outline: 2px solid var(--brand-purple);
+  outline-offset: 2px; border-radius: 8px;
+}
+
+/* ===== Header compact + lien cliquable ===== */
+.topbar {
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in oklab, var(--bg) 92%, #fff 8%);
+}
+.topbar-inner {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 16px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+}
+.topbar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.topbar-text {
+  font-size: 13px;
+  color: var(--ink);
+  opacity: 0.9;
+}
+.topbar-link:hover .topbar-text { opacity: 1; }
+.topbar .dot { color: var(--muted); }
+.logo {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: #111;
+  color:#fff;
+  font-weight: 700;
+  box-shadow: var(--shadow-1);
+  font-size: 14px;
+}
+
+/* Layout principal */
+.container { max-width: 880px; margin: 0 auto; padding: 16px; }
+
+.h1 {
+  font-size: var(--h1);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin: 12px 0 2px;
+}
+.subtitle {
+  text-align: center;
+  color: var(--muted);
+  font-size: var(--subtitle);
+  margin: 0 0 14px;
+}
+
+/* Cards */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow-1);
+}
+.compact { padding: 14px; }
+
+/* Input group (textarea + bouton) */
+.input-row { display: flex; gap: 10px; align-items: stretch; margin-top: 8px; }
+.textarea {
+  flex: 1;
+  min-height: 110px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--ink);
+  padding: 10px 12px;
+  resize: vertical;
+}
+.textarea::placeholder { color: var(--muted); }
+
+/* Bouton principal */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 10px 16px; border: 0; border-radius: var(--radius-pill);
+  color: #fff; font-weight: 700; cursor: pointer; user-select: none;
+  background: linear-gradient(180deg, var(--brand-500), var(--brand-purple));
+  box-shadow: var(--shadow-2); white-space: nowrap; height: 40px;
+}
+.btn:hover { filter: brightness(1.05); }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: .55; box-shadow: none; cursor: not-allowed; }
+
+/* Aide & meta */
+.helper, .muted { color: var(--muted); font-size: 14px; }
+.error { color: #d22; font-size: 14px; }
+
+/* Tableau résultats */
+.table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.table th, .table td { padding: 8px; border-bottom: 1px solid var(--border); text-align: left; }
+.table thead th { color: var(--muted); font-weight: 600; }
+
+/* CTA EasyNode */
+.cta {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 10px 16px; border-radius: var(--radius-pill);
+  background: #0f172a; color: #fff; font-weight: 700; text-decoration: none;
+}
+.cta:hover { filter: brightness(1.05); }
+
+/* Utilitaires de marge */
+.mt-8 { margin-top: 8px; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+
+/* Rythme vertical plus compact */
+body { line-height: 1.45; }
