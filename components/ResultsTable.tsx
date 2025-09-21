@@ -2,6 +2,7 @@ export type ResultItem = {
   address: string;
   status: "unknown" | "checking" | "found" | "not_found" | "invalid" | "error";
   errorMsg?: string;
+  count?: number; // ← nombre de licences
 };
 
 export default function ResultsTable({ results }: { results: ResultItem[] }) {
@@ -9,12 +10,12 @@ export default function ResultsTable({ results }: { results: ResultItem[] }) {
 
   const label = (r: ResultItem) => {
     switch (r.status) {
-      case "checking": return "Checking…";
-      case "found": return "✅ License found";
+      case "checking":  return "Checking…";
+      case "found":     return "✅ License found";
       case "not_found": return "❌ No license";
-      case "invalid": return "Invalid address";
-      case "error": return r.errorMsg ?? "Error";
-      default: return "—";
+      case "invalid":   return "Invalid address";
+      case "error":     return r.errorMsg ?? "Error";
+      default:          return "—";
     }
   };
 
@@ -25,6 +26,7 @@ export default function ResultsTable({ results }: { results: ResultItem[] }) {
         <tr>
           <th>Address</th>
           <th>Status</th>
+          <th>Count</th> {/* nouvelle colonne */}
         </tr>
       </thead>
       <tbody>
@@ -32,6 +34,7 @@ export default function ResultsTable({ results }: { results: ResultItem[] }) {
           <tr key={r.address}>
             <td style={{ wordBreak: "break-all" }}>{r.address}</td>
             <td>{label(r)}</td>
+            <td>{typeof r.count === "number" ? r.count : "—"}</td>
           </tr>
         ))}
       </tbody>
