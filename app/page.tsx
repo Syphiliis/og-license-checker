@@ -9,8 +9,13 @@ import useCheckLicenses from "@hooks/useCheckLicenses";
 
 export default function Page() {
   const [rawInput, setRawInput] = useState("");
+
   const addresses = useMemo(
-    () => rawInput.split(/\r?\n/).map(s => s.trim()).filter(Boolean),
+    () =>
+      rawInput
+        .split(/\r?\n/)
+        .map((s) => s.trim())
+        .filter(Boolean),
     [rawInput]
   );
 
@@ -25,14 +30,13 @@ export default function Page() {
 
   return (
     <main className="container">
+      {/* Header */}
       <h1 className="h1">0G Alignment Node — License Checker</h1>
       <p className="subtitle">Check up to 10 EVM addresses on Arbitrum.</p>
 
       {/* Card 1 — Input */}
       <form className="card" onSubmit={onSubmit} aria-describedby="helper">
-        <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 8 }}>
-          EVM Wallet Addresses
-        </div>
+        <div className="label">EVM Wallet Addresses</div>
 
         <div className="input-row">
           <AddressTextarea
@@ -54,7 +58,7 @@ export default function Page() {
         </p>
 
         {tooMany && (
-          <div className="error" role="alert" style={{ marginTop: 6 }}>
+          <div className="error mt-2" role="alert">
             {UI.tooMany(MAX_ADDRESSES, addresses.length)}
           </div>
         )}
@@ -63,39 +67,38 @@ export default function Page() {
       {/* Card 2 — Results */}
       <section className="card compact mt-16">
         <div aria-live="polite" aria-atomic="true">
-          {results.length ? (
+          {results.length > 0 ? (
             <ResultsTable results={results} />
           ) : (
             <p className="helper">
               Enter a wallet and click <strong>Check</strong> to see if you have
-              licence on your address.
+              a license on your address.
             </p>
           )}
         </div>
       </section>
 
-      {/* Card 3 — CTA */}
+      {/* Card 3 — CTA (EasyNode) */}
       <section
-        className="card"
-        style={{
-          marginTop: 16,
-          display: "flex",
-          gap: 12,
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
+        className="card cta-easynode mt-16 flex flex-wrap items-center justify-between gap-3"
       >
         <div>
-          <div style={{ fontWeight: 600 }}>Want to go further?</div>
-          <p className="helper">Deploy or buy nodes in minutes.</p>
+          <div className="cta-title">
+            Got one or more 0G Alignment licenses in your wallet?
+          </div>
+          <p className="helper mt-1">
+            Host them for free on EasyNode and claim your $0G tokens.
+          </p>
         </div>
+
         <a
           className="cta"
-          href="https://app.easy-node.xyz/"
+          href="https://app.easy-node.xyz/?utm_source=checker&utm_medium=cta&utm_campaign=0g"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Host your 0G Alignment license on EasyNode and claim your $0G tokens"
         >
-          Deploy or buy a node with EasyNode →
+          Host on EasyNode →
         </a>
       </section>
     </main>

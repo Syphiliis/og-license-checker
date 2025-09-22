@@ -160,13 +160,24 @@ body {
 .table th, .table td { padding: 8px; border-bottom: 1px solid var(--border); text-align: left; }
 .table thead th { color: var(--muted); font-weight: 600; }
 
-/* CTA EasyNode */
+/* CTA EasyNode — compact, lisible, responsive */
+.cta-easynode { align-items: center; }
+.cta-title { font-weight: 700; font-size: 16px; letter-spacing: -0.01em; }
+
+/* Bouton CTA (variante violette cohérente avec .btn) */
 .cta {
   display: inline-flex; align-items: center; justify-content: center;
   padding: 10px 16px; border-radius: var(--radius-pill);
-  background: #0f172a; color: #fff; font-weight: 700; text-decoration: none;
+  background: linear-gradient(180deg, var(--brand-500), var(--brand-purple));
+  color: #fff; font-weight: 700; text-decoration: none;
+  white-space: nowrap;
+  box-shadow: var(--shadow-2);
 }
 .cta:hover { filter: brightness(1.05); }
+
+@media (max-width: 640px) {
+  .cta { width: 100%; justify-content: center; }
+}
 
 /* Utilitaires de marge */
 .mt-8 { margin-top: 8px; }
